@@ -56,7 +56,7 @@ jobs:
             '.version = $v | .srcHash = $h' version.json > version.json.tmp
           mv version.json.tmp version.json
 
-          out="$(nix build --no-link --print-out-paths .#static)"
+          out="$(nix build --no-link --print-out-paths '.#static^out')"
           cp "$out/bin/tmux" tmux-linux-x86_64
           bin_sha="$(nix hash file --type sha256 --sri tmux-linux-x86_64)"
 
